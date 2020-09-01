@@ -35,18 +35,45 @@
 </head>
 <body>
     <div class="cs-top">
-        <img class="cs-img" src="./cj.jpg" alt="">
-        <h2 class="cs-title">《名称1》</h2>
-        <div class="cs-name">张三丰</div>
+        <img class="cs-img" src="" alt="">
+        <h2 class="cs-title"></h2>
+        <div class="cs-name"></div>
     </div>
     <p class="cs-p">
-        记者从山西省临汾市襄县“8.29”重大坍塌事故现场抢险救援领导组获悉，
-        救援工作于8月30日3时45分已全部结束，救出57人，其中29人遇难，7人重伤，21人轻伤
-        记者从山西省临汾市襄县“8.29”重大坍塌事故现场抢险救援领导组获悉，救援工作于8月30日3时45分已全部结束，救出57人，其中29人遇难，7人重伤，21人轻伤
-        记者从山西省临汾市襄县“8.29”重大坍塌事故现场抢险救援领导组获悉，救援工作于8月30日3时45分已全部结束，救出57人，其中29人遇难，7人重伤，21人轻伤
-        记者从山西省临汾市襄县“8.29”重大坍塌事故现场抢险救援领导组获悉，救援工作于8月30日3时45分已全部结束，救出57人，其中29人遇难，7人重伤，21人轻伤
     </p>
-    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.1.0/axios.min.js"></script>
-    <script src="./js/index.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script>
+        fetchData()
+        function fetchData(){
+            // var id = getUrlParam('id')
+            var id = 142
+            console.log(id)
+            // let p = '/paper-web/search/getPaperUserInfoById'
+            let p = 'http://localhost:3300/paper-web/search/getPaperUserInfoById'
+            $.ajax({
+                type:'GET',
+                url:p,
+                data:{id:id},
+                success:function (res){
+                    var data = res.data
+                    var url = JSON.parse(data.paperUrl)[0].url
+                    var paperName = data.paperName
+                    var paperAuthor = data.paperAuthor
+                    var paperDetail = data.paperDetail
+
+                    $('.cs-img').attr('src',url)
+                    $('.cs-title').text("《"+paperName+"》")
+                    $('.cs-name').text(paperAuthor)
+                    $('.cs-p').html(paperDetail)
+                }
+            })
+        }
+
+         function getUrlParam(name) {
+            const reg = new RegExp('(^|&)' + name + '=([^&]*)')
+            const r = window.location.search.substr(1).match(reg)
+            if (r != null) return decodeURIComponent(r[2])
+        }
+    </script>
 </body>
 </html>

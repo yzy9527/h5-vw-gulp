@@ -14,12 +14,15 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-//写个接口123
-let target =  'http://47.103.124.166/paper-web/aper-web/search/getPaperUserInfoList'
-app.use('/api', createProxyMiddleware({target,changeOrigin: true}));
+//目标地址
+let target = 'http://47.103.124.166'
 
-
-// app.listen(3000)
+let arrayUrl = [
+    '/paper-web/search/getPaperUserInfoById'
+]
+arrayUrl.forEach(ele=>{
+    app.use(ele, createProxyMiddleware({target,changeOrigin: true}));
+})
 
 
 //配置服务端口
