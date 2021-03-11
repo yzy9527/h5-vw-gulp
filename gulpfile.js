@@ -74,6 +74,7 @@ function clean(cb) {
 function watcher(cb) {
     watch('./js/*.js', js)
     // watch('./css/*.scss', css)
+    // watch('./*.html').on('change',reload)
 }
 
 //server
